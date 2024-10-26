@@ -1,0 +1,56 @@
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+
+.container-home {
+  display: flex;
+  width: 100%;
+  height: 100vh;
+  position: relative;
+}
+
+.left-home {
+  background: linear-gradient(rgba(51, 162, 170, 0.85), rgba(16, 111, 118, 0.723)), url('/assets/home.png');
+  background-size: cover;
+  background-position: right;
+  width:55%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+}
+
+.right-home {
+  background-color: #FBFCFC; /* Rojo */
+  width: 50%;
+  height: 100%;
+  border-top-left-radius:40px;
+  border-bottom-left-radius: 40px;
+  position: absolute;
+  right: 0;
+  box-shadow: -10px 0 15px rgba(0, 0, 0, 0.2); /* Sombra para dar efecto de estar encima */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+
+.texts {
+    max-width: 300px;
+}
+
+
+
+.box {
+  display: flex;
+  column-gap: 10px;
+  padding-top: 10px;
+}
+
+.text-box > p {
+  margin: 0;
+}

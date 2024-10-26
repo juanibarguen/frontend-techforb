@@ -1,0 +1,54 @@
+<div class="register-container">
+  <h2>Crear una cuenta</h2>
+
+  <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+    <div class="input-container">
+      <input type="text" id="firstName" formControlName="firstName" placeholder="Ingresa tu nombre" required autocomplete="off" />
+      <div *ngIf="registerForm.get('firstName')?.invalid && registerForm.get('firstName')?.touched" class="error">
+        El nombre es requerido.
+      </div>
+    </div>
+
+    <div class="input-container">
+      <input type="text" id="lastName" formControlName="lastName" placeholder="Ingresa tu apellido" required autocomplete="off" />
+      <div *ngIf="registerForm.get('lastName')?.invalid && registerForm.get('lastName')?.touched" class="error">
+        El apellido es requerido.
+      </div>
+    </div>
+
+    <div class="input-container">
+      <input type="email" id="mail" formControlName="mail" placeholder="Ingresa tu correo" required autocomplete="off" />
+      <div *ngIf="registerForm.get('mail')?.invalid && registerForm.get('mail')?.touched" class="error">
+        Ingresa un correo electrónico válido.
+      </div>
+    </div>
+
+    <div class="input-container">
+      <input type="text" id="username" formControlName="username" placeholder="Ingresa tu usuario" required autocomplete="off" />
+      <div *ngIf="registerForm.get('username')?.invalid && registerForm.get('username')?.touched" class="error">
+        El nombre de usuario es requerido.
+      </div>
+    </div>
+
+    <div class="input-container">
+      <input type="password" id="password" formControlName="password" placeholder="Ingresa tu contraseña" required autocomplete="off" />
+      <div *ngIf="registerForm.get('password')?.invalid && registerForm.get('password')?.touched" class="error">
+        La contraseña debe tener al menos 8 caracteres.
+      </div>
+    </div>
+
+    <div class="input-container">
+      <input type="password" id="confirmPassword" formControlName="confirmPassword" placeholder="Confirma tu contraseña" required autocomplete="off" />
+      <div *ngIf="errorMessage === 'Las contraseñas no coinciden'" class="error">
+        Las contraseñas no coinciden.
+      </div>
+    </div>
+
+    <button type="submit" [disabled]="registerForm.invalid">Registrarse</button>
+  </form>
+
+  <div *ngIf="successMessage" class="success">{{ successMessage }}</div>
+  <div *ngIf="errorMessage && errorMessage !== 'Las contraseñas no coinciden'" class="error">{{ errorMessage }}</div>
+
+  <p>¿Ya tienes una cuenta? <a (click)="goToLogin()" class="goToLogin">Iniciar sesión</a></p>
+</div>
