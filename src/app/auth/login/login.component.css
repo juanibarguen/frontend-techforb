@@ -3,6 +3,10 @@
     color: red;
     margin-bottom: 10px;
   }
+
+  .labelResponsive {
+    display: none;
+  }
   
   .success-message {
     color: green;
@@ -44,7 +48,7 @@
   width: 290px;
 }
 
-label {
+#label {
   position: absolute;
   top: -10px;
   left: 10px;
@@ -85,4 +89,74 @@ form {
 .content-cta > button {
   width: 35%;
   font-size: 13px;
+}
+
+
+
+
+/* Ocultar el div por defecto */
+.login-responsive-img {
+  display: none; /* O puedes usar visibility: hidden; */
+}
+
+@media screen and (max-width:655px) {
+  .login-container  h2 {
+    display: none;
+  }
+
+  .login-container-text {
+    text-align: center;
+    margin: 0 0 110px 0;
+  }
+
+  .login-container-text h3{
+    font-size: 30px;
+    font-weight: 500;
+    margin: 0;
+
+  }
+
+  .content-cta a {
+    display: none;
+  }
+
+  .login-container p {
+    display: none;
+  }
+
+  .login-container-form {
+    height: 35vh;
+  }
+
+  .login-responsive-img {
+    display: flex;
+    justify-content: center;
+  }
+
+  .content-cta > button {
+    width: 302px;
+    margin-top: 100px;
+    height: 50px;
+    font-size: 16px;
+    font-weight: 500;
+    position: absolute;
+    bottom: 50px;
+  }
+
+  #label {
+    display: none;
+  }
+
+  .labelResponsive {
+    display: block;
+    font-size: 12px; 
+  color: gray;
+  padding: 0 0 10px 5px;
+  }
+
+  input {
+    padding: 10px 0px 10px 10px;
+}
+
+
 }
