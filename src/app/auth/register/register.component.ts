@@ -52,7 +52,7 @@ export class RegisterComponent {
             };
 
             console.log('Registro solicitado:', payload); // Verifica el objeto que se envía
-            this.http.post('http://localhost:8080/auth/register', payload).subscribe({
+            this.http.post('https://api-techforbu-production.up.railway.app/auth/register', payload).subscribe({
                 next: (response) => {
                     this.successMessage = 'Registro exitoso. Redirigiendo al inicio de sesión...';
                     this.errorMessage = '';
