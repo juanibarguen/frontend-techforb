@@ -7,7 +7,7 @@ import { Plant } from '../model/plant';
   providedIn: 'root'
 })
 export class PlantService {
-  private apiUrl = 'http://localhost:8080/plants';
+  private apiUrl = 'https://api-techforbu-production.up.railway.app/plants';
 
   constructor(private http: HttpClient) { }
 
