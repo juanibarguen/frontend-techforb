@@ -39,13 +39,12 @@ export class RegisterComponent {
       // Verificar si las contraseñas coinciden
       if (password !== confirmPassword) {
         this.errorMessage = 'Las contraseñas no coinciden';
-        this.registerForm.get('password')?.reset(); 
+        this.registerForm.get('password')?.reset();
         this.registerForm.get('confirmPassword')?.reset();
       } else {
         // Si las contraseñas coinciden, continuar con la solicitud al backend
         this.http.post('http://localhost:8080/auth/register', this.registerForm.value).subscribe({
           next: (response) => {
-            // Mostrar mensaje de éxito
             this.successMessage = 'Registro exitoso. Redirigiendo al inicio de sesión...';
             this.errorMessage = '';
 
@@ -55,9 +54,12 @@ export class RegisterComponent {
             }, 2000);
           },
           error: (err) => {
-            // Manejar el error de registro
-            console.error(err);
-            this.errorMessage = err.error.message || 'Error al registrar el usuario';
+            // Manejo específico del error del backend
+            if (err.status === 400 && typeof err.error === 'string') {
+              this.errorMessage = err.error; // Usar el mensaje que envía el backend (email o username duplicado)
+            } else {
+              this.errorMessage = 'Error al registrar el usuario';
+            }
             this.successMessage = '';
           }
         });

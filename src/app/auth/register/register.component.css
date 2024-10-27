@@ -46,7 +46,7 @@
   }
   
   input {
-    width: 380px;
+    width: 320px;
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 5px;
@@ -75,4 +75,12 @@
     font-weight: 600;
     cursor: pointer;
     color: #111111;
+  }
+  
+
+
+  @media screen and (max-width:760px) {
+    input {
+      width: 280px;
+    }
   }

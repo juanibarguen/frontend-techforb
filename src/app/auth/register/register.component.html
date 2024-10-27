@@ -50,5 +50,13 @@
   <div *ngIf="successMessage" class="success">{{ successMessage }}</div>
   <div *ngIf="errorMessage && errorMessage !== 'Las contraseñas no coinciden'" class="error">{{ errorMessage }}</div>
 
+  <div *ngIf="errorMessage" class="alert alert-danger">
+    {{ errorMessage }}
+  </div>
+  
+  <div *ngIf="successMessage" class="alert alert-success">
+    {{ successMessage }}
+  </div>
+
   <p>¿Ya tienes una cuenta? <a (click)="goToLogin()" class="goToLogin">Iniciar sesión</a></p>
 </div>

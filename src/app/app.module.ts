@@ -10,7 +10,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { HomeComponent } from './home/home.component';
 import { SidebarComponent } from './home/sidebar/sidebar.component';
-
+import { SidebarResponsiveComponent } from './home/sidebar-responsive/sidebar-responsive.component';
 // Función para obtener el token
 export function tokenGetter() {
   return localStorage.getItem('token');
@@ -20,7 +20,7 @@ export function tokenGetter() {
   declarations: [
     AppComponent,
     LoginComponent,  // Asegúrate de incluir el LoginComponent
-    RegisterComponent, DashboardComponent, HomeComponent, SidebarComponent // Asegúrate de incluir el RegisterComponent
+    RegisterComponent, DashboardComponent, HomeComponent, SidebarComponent, SidebarResponsiveComponent, // Asegúrate de incluir el RegisterComponent
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,50 @@
+<div class="sidebar-responsive">
+    <div class="nav-item left" (click)="toggleLeftMenu()">
+      <div class="icon-menu">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M5 17H19M5 12H19M5 7H19" stroke="#1F1F1F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            
+      </div>
+    </div>
+    <div class="nav-item middle">
+        <div class="icon-home">
+            <svg width="50" height="50" viewBox="0 0 36 33" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd" clip-rule="evenodd" d="M21.0618 10.0087L15.2833 0L0 26.4715H11.557L21.0618 10.0087Z" fill="#ECECEC"/>
+                <path d="M23.7229 8.05719L34.3548 26.4722H13.091L23.7229 8.05719Z" fill="#ECECEC"/>
+                <path d="M13.4734 22.75C14.8186 20.4167 18.1814 20.4167 19.5266 22.75C20.8717 25.0833 19.1903 28 16.5 28C13.8097 28 12.1283 25.0833 13.4734 22.75Z" fill="white"/>
+                <path fill-rule="evenodd" clip-rule="evenodd" d="M14.622 23.4141C13.7873 24.862 14.8306 26.6718 16.5 26.6718C18.1694 26.6718 19.2127 24.862 18.378 23.4141C17.5433 21.9662 15.4566 21.9662 14.622 23.4141ZM19.5266 22.75C18.1814 20.4167 14.8186 20.4167 13.4734 22.75C12.1283 25.0833 13.8097 28 16.5 28C19.1903 28 20.8717 25.0833 19.5266 22.75Z" fill="#09050D"/>
+            </svg>
+        </div>
+    </div>
+    <div class="nav-item right" (click)="toggleRightMenu()">
+      <div class="icon-notification">
+        <svg width="29" height="29" viewBox="0 0 29 29" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M8.87322 10.7282C9.21745 7.6302 11.8361 5.28644 14.9531 5.28644V5.28644C18.0702 5.28644 20.6888 7.6302 21.033 10.7282L21.3088 13.2098C21.4502 14.4829 21.8646 15.7105 22.5236 16.8088L23.1566 17.8638C23.4386 18.3338 23.5796 18.5688 23.6324 18.7513C23.8601 19.5385 23.3956 20.3589 22.6035 20.5686C22.4198 20.6172 22.1458 20.6172 21.5976 20.6172H8.3086C7.76049 20.6172 7.48644 20.6172 7.30278 20.5686C6.51063 20.3589 6.04613 19.5385 6.27387 18.7513C6.32667 18.5688 6.46767 18.3338 6.74967 17.8638L7.38265 16.8088C8.04167 15.7105 8.45604 14.4829 8.59749 13.2098L8.87322 10.7282Z" stroke="#9595A6" stroke-width="1.45"/>
+            <path d="M11.7799 21.0616C11.9671 21.8766 12.3795 22.5967 12.9532 23.1103C13.527 23.6239 14.2299 23.9023 14.9531 23.9023C15.6763 23.9023 16.3793 23.6239 16.953 23.1103C17.5267 22.5967 17.9392 21.8766 18.1263 21.0616" stroke="#9595A6" stroke-width="1.46007" stroke-linecap="round"/>
+            </svg>            
+      </div>
+    </div>
+  
+    <!-- MENU -->
+    <div class="full-screen-menu left-menu" *ngIf="isLeftMenuOpen">
+      
+      <ul>
+        <li><a href="/dashboard">Dashboard</a></li>
+        <li><a href="/dashboard">Monitoreo por planta</a></li>
+        <li><a href="/dashboard">Historico de sensores</a></li>
+        <li><a href="/dashboard">Historico de plantas</a></li>
+        <li (click)="onLogout()"><a href="#">Cerrar sesion</a></li>
+      </ul>
+
+      <button (click)="closeLeftMenu()">x</button>
+    </div>
+  
+    <!-- NOTIFICATIONS -->
+    <div class="full-screen-menu right-menu" *ngIf="isRightMenuOpen">
+        <p>No hay notificaciones</p>
+      <button (click)="closeRightMenu()">x</button>
+
+    </div>
+  </div>
+  

@@ -6,7 +6,23 @@ body {
     font-family: "Poppins", sans-serif;
   }
 
+  * {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
 
-  p {
-    font-size: 12px;
+body {
+  background-color: #E8F0F3;
+  height: 100%;
+}
+html {
+  height: 100%;
+}
+
+
+@media (max-width: 720px) {
+  body {
+    background-color: #F9F9FA;
   }
+}
