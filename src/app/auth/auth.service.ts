@@ -7,8 +7,8 @@ import { map } from 'rxjs/operators';
   providedIn: 'root',
 })
 export class AuthService {
-  private apiUrl = 'http://localhost:8080/auth'; // Asegúrate de que esta URL es correcta
-  private userSubject: BehaviorSubject<any>; // Para almacenar y compartir los datos del usuario
+  private apiUrl = 'https://api-techforbu-production.up.railway.app/auth'; 
+  private userSubject: BehaviorSubject<any>;
   public user: Observable<any>;
 
   private userInfo = new BehaviorSubject<any>(null); // Estado del usuario
