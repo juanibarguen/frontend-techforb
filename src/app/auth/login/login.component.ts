@@ -21,41 +21,41 @@ export class LoginComponent {
     });
   }
 
- login() {
-  if (this.loginForm.valid) {
-    const credentials = this.loginForm.value;
-    //console.log('Credenciales enviadas:', credentials);
-
-    this.authService.login(credentials).subscribe({
-      next: (response: any) => {
-        console.log(`Login exitoso para el usuario: ${response.user.firstname} `);
-        this.successMessage = 'Inicio de sesión exitoso. Redirigiendo al dashboard...';
-
-        
-        this.authService.setToken(response.token);
-
-      
-        this.authService.getUserInfo().subscribe({
-          next: (userInfo) => {
-            this.authService.setUserInfo(userInfo); 
-            console.log('Datos del usuario obtenidos:', userInfo);
-            
-            this.router.navigate(['/dashboard']);
-          },
-          error: (error) => {
-            console.error('Error al obtener la información del usuario:', error);
-            this.errorMessage = 'Error al cargar los datos del usuario.';
-          }
-        });
-      },
-      error: (err) => {
-        console.error('Error en el inicio de sesión', err);
-        this.errorMessage = 'Error en el inicio de sesión. Verifica tus credenciales.';
-        this.successMessage = '';
-      }
-    });
+  login() {
+    if (this.loginForm.valid) {
+      const credentials = this.loginForm.value;
+      console.log('Credenciales enviadas:', credentials);
+  
+      this.authService.login(credentials).subscribe({
+        next: (response: any) => {
+          console.log(`Login exitoso para el usuario: ${response.user.firstname}`);
+          this.successMessage = 'Inicio de sesión exitoso. Redirigiendo al dashboard...';
+  
+          this.authService.setToken(response.token);
+  
+          this.authService.getUserInfo().subscribe({
+            next: (userInfo) => {
+              this.authService.setUserInfo(userInfo); 
+              console.log('Datos del usuario obtenidos:', userInfo);
+              
+              this.router.navigate(['/dashboard']);
+            },
+            error: (error) => {
+              console.error('Error al obtener la información del usuario:', error);
+              this.errorMessage = 'Error al cargar los datos del usuario.';
+            }
+          });
+        },
+        error: (err) => {
+          console.error('Error en el inicio de sesión', err);
+          // Utiliza el mensaje de error específico del backend
+          this.errorMessage = err.error || 'Error en el inicio de sesión. Verifica tus credenciales.';
+          this.successMessage = '';
+        }
+      });
+    }
   }
-}
+  
 
 
     goToRegister() {

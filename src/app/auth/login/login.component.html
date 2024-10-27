@@ -29,6 +29,15 @@
       <a href="" rel="noopener noreferrer">¿Olvidaste tu contraseña?</a>
       <button type="submit">Iniciar Sesión</button>
     </div>
+
+    <div *ngIf="errorMessage" class="alert alert-danger">
+      {{ errorMessage }}
+    </div>
+    
+    <div *ngIf="successMessage" class="alert alert-success">
+      {{ successMessage }}
+    </div>
+    
     
   </form>
 
