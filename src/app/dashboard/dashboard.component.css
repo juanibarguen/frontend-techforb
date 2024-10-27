@@ -14,6 +14,33 @@ html {
   height: 100%;
 }
 
+.notificaciones {
+  cursor: pointer;
+}
+
+.notification{
+  top: 85px;
+  position: absolute;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5); /* Sombra simple */
+
+  background: #fff;
+  padding: 15px;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  min-height: 150px;
+  min-width: 120px;
+}
+
+.notification button {
+  background-color: #33a3aa;
+    color: white;
+    border: none;
+    padding: 4px;
+    border-radius: 5px;
+    cursor: pointer;
+}
 
 
 .container-sidebar-responsive {
@@ -534,6 +561,23 @@ html {
 .content-header-responsive {
   display: none;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
   @media screen and (max-width:900px) { 

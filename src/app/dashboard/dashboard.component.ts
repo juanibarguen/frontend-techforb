@@ -44,6 +44,10 @@ userData: any;
 hasSelectedPlant: boolean = false; // Propiedad para controlar el mensaje inicial
 
 
+notificaciones: boolean = false;
+  mensaje: string = '';
+  notificacionVista: boolean = false; // Nueva variable para verificar si la notificación ha sido vista
+
 constructor(private plantService: PlantService, private fb: FormBuilder, private authService:AuthService) { 
   // Inicializar el formulario de crear planta
   this.plantForm = this.fb.group({
@@ -78,6 +82,20 @@ constructor(private plantService: PlantService, private fb: FormBuilder, private
     }
   }
 
+  mostrarNotificacion() {
+    if (!this.notificacionVista) { // Solo muestra si no ha sido vista
+      this.notificaciones = true;
+      this.mensaje = '¡Gracias por probar la app!';
+    }else {
+      this.notificaciones = true
+    }
+  }
+
+  cerrarNotificacion() {
+    this.notificaciones = false;
+    this.notificacionVista = true; // Marca la notificación como vista
+    this.mensaje = 'No hay notificaciones.'; // Cambia el mensaje después de cerrarla
+  }
    // Método para obtener y asignar datos de indicadores de un país específico
    showIndicators(plant: any) {
    // console.log('Plant data:', plant);
