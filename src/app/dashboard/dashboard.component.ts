@@ -33,7 +33,15 @@ editingPlantForm: FormGroup; // Declarar el formulario de edición
 editingPlant: Plant | null = null; // Guardar la planta que se está editando
 
 
+selectedPlant: Plant | null = null; // Selected plant details to display in template
+indicatorsDataCountry: any[] = []; // Array for indicatorsData display
+selectedIndicatorsData: any[] = [];
+
 userData: any;
+
+
+
+hasSelectedPlant: boolean = false; // Propiedad para controlar el mensaje inicial
 
 
 constructor(private plantService: PlantService, private fb: FormBuilder, private authService:AuthService) { 
@@ -66,10 +74,53 @@ constructor(private plantService: PlantService, private fb: FormBuilder, private
     const user = localStorage.getItem('user');
     if (user) {
       this.userData = JSON.parse(user);
-      console.log('Datos del usuario en el dashboard:', this.userData);
+      //console.log('Datos del usuario en el dashboard:', this.userData);
     }
   }
 
+   // Método para obtener y asignar datos de indicadores de un país específico
+   showIndicators(plant: any) {
+   // console.log('Plant data:', plant);
+   // console.log('Indicators:', plant.indicators);
+
+    if (plant.indicators && Object.keys(plant.indicators).length > 0) {
+      this.selectedIndicatorsData = Object.keys(plant.indicators).map(key => {
+        const svgData = this.indicatorsDataJson.find(item => item.key === key);
+        return {
+          key: key,
+          title: key.charAt(0).toUpperCase() + key.slice(1),
+          units: plant.indicators[key],
+          svg: svgData ? svgData.svg : null
+        };
+      });
+      this.hasSelectedPlant = true; // Actualiza hasSelectedPlant si se encontraron indicadores
+      //console.log('Selected indicators data:', this.selectedIndicatorsData);
+    } else {
+      console.warn('No indicators data found for the selected plant.');
+      this.selectedIndicatorsData = [];
+      this.hasSelectedPlant = false; // No hay indicadores, vuelve a false
+    }
+  }
+  
+
+
+
+  showPlantDetails(plant: Plant) {
+    this.selectedPlant = plant;
+    console.log('Plant data:', this.selectedPlant);
+  
+    // Hacer casting temporalmente para cada valor de `Object.entries()`
+    this.indicatorsDataCountry = Object.entries(this.selectedPlant.indicators).map(([key, value]) => {
+      const indicatorValue = value as { unit1: number; unit2: number; unit3: number };
+      return {
+        title: key,
+        unit1: indicatorValue.unit1,
+        unit2: indicatorValue.unit2,
+        unit3: indicatorValue.unit3,
+      };
+    });
+  }
+  
   
 
   toggleActionMenu(plantId: number) {
@@ -212,7 +263,7 @@ savePlant(): void {
 }
 
 printPlantData(plant: Plant): void {
-  console.log('Datos de la planta:', plant);
+  //console.log('Datos de la planta:', plant);
   this.selectedPlantIndicators = plant.indicators; // Guarda los indicadores
 }
 
@@ -227,7 +278,7 @@ getIndicators() {
   });
 }
 
-indicatorsData = [
+indicatorsDataJson = [
   { key: 'energia', title: 'Energía', svg: 'assets/svgs/energia.svg' },
   { key: 'monoxidoCarbono', title: 'Monóxido de Carbono', svg: 'assets/svgs/monoxido.svg' },
   { key: 'niveles', title: 'Niveles', svg: 'assets/svgs/niveles.svg' },

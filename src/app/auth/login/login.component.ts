@@ -24,7 +24,7 @@ export class LoginComponent {
  login() {
   if (this.loginForm.valid) {
     const credentials = this.loginForm.value;
-    console.log('Credenciales enviadas:', credentials);
+    //console.log('Credenciales enviadas:', credentials);
 
     this.authService.login(credentials).subscribe({
       next: (response: any) => {
