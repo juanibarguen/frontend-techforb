@@ -30,7 +30,7 @@ export function tokenGetter() {
     JwtModule.forRoot({
       config: {
         tokenGetter: tokenGetter,
-        allowedDomains: ['https://api-techforbu-production.up.railway.app'], // Cambia esto si tu API está en otro dominio
+        allowedDomains: ['https://api-techforbu-production.up.railway.app'],//API
         disallowedRoutes: [
           'https://api-techforbu-production.up.railway.app/auth/login', 
           'https://api-techforbu-production.up.railway.app/auth/register'
