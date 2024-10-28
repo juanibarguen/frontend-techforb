@@ -9,8 +9,6 @@ import { Plant } from '../model/plant';
 export class PlantService {
   private apiUrl = 'https://api-techforbu-production.up.railway.app/plants'; 
 
-
-  
   constructor(private http: HttpClient) { }
 
   getAllPlants(): Observable<Plant[]> {
