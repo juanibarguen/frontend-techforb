@@ -11,6 +11,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { HomeComponent } from './home/home.component';
 import { SidebarComponent } from './home/sidebar/sidebar.component';
 import { SidebarResponsiveComponent } from './home/sidebar-responsive/sidebar-responsive.component';
+
 // Función para obtener el token
 export function tokenGetter() {
   return localStorage.getItem('token');
@@ -29,10 +30,10 @@ export function tokenGetter() {
     JwtModule.forRoot({
       config: {
         tokenGetter: tokenGetter,
-        allowedDomains: ['localhost:8080'], // Cambia esto si tu API está en otro dominio
+        allowedDomains: ['https://api-techforbu-production.up.railway.app'], // Cambia esto si tu API está en otro dominio
         disallowedRoutes: [
-          'http://localhost:8080/auth/login', 
-          'http://localhost:8080/auth/register'
+          'https://api-techforbu-production.up.railway.app/auth/login', 
+          'https://api-techforbu-production.up.railway.app/auth/register'
         ]
       }
     }),

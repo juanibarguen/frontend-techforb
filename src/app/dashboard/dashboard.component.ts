@@ -9,44 +9,37 @@ import { AuthService } from '../auth/auth.service';
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.css']
 })
+
 export class DashboardComponent implements OnInit {
-  plants: Plant[] = [];
-  loading: boolean = true;
-  error: string = '';
-  totalReadings: number = 0; 
-  totalMediumAlerts: number = 0; 
-  totalRedAlerts: number = 0; 
-  totalDisabledSensors: number = 0; 
+  plants: Plant[] = []; // Lista de plantas obtenidas
+  loading: boolean = true; // Indica si el componente está cargando datos
+  error: string = ''; // Mensaje de error
+  totalReadings: number = 0; // Total de lecturas de sensores
+  totalMediumAlerts: number = 0; // Total de alertas medias
+  totalRedAlerts: number = 0; // Total de alertas rojas
+  totalDisabledSensors: number = 0; // Total de sensores deshabilitados
 
-  isActionMenuOpen: number | null = null; 
+  isActionMenuOpen: number | null = null; // Controla el menú de acciones por planta
+  isMenuOpen: number | null = null; // Controla el menú de opciones de planta
+  selectedPlantIndicators: any = null; // Almacena los indicadores de la planta seleccionada
 
-    isMenuOpen: number | null = null; 
+  showForm: boolean = false; // Controla la visibilidad del formulario de creación
+  plantForm: FormGroup; // Formulario reactivo para crear plantas
+  showEditForm: boolean = false; // Controla la visibilidad del formulario de edición
+  editingPlantForm: FormGroup; // Formulario reactivo para editar plantas
+  editingPlant: Plant | null = null; // Planta actualmente en edición
 
-    selectedPlantIndicators: any = null; // Para almacenar los indicadores de la planta seleccionada
+  selectedPlant: Plant | null = null; // Planta seleccionada para mostrar detalles
+  indicatorsDataCountry: any[] = []; // Array para mostrar los datos de indicadores
+  selectedIndicatorsData: any[] = []; // Almacena datos de indicadores seleccionados
 
-  // Propiedades para el formulario reactivo
-  showForm: boolean = false; // Controlar la visibilidad del formulario
-  plantForm: FormGroup; // Declarar el formulario
-// Agregar las propiedades necesarias para la edición
-showEditForm: boolean = false; // Controlar la visibilidad del formulario de edición
-editingPlantForm: FormGroup; // Declarar el formulario de edición
-editingPlant: Plant | null = null; // Guardar la planta que se está editando
+  userData: any; // Datos del usuario
 
+  hasSelectedPlant: boolean = false; // Controla el mensaje inicial en caso de no tener planta seleccionada
 
-selectedPlant: Plant | null = null; // Selected plant details to display in template
-indicatorsDataCountry: any[] = []; // Array for indicatorsData display
-selectedIndicatorsData: any[] = [];
-
-userData: any;
-
-
-
-hasSelectedPlant: boolean = false; // Propiedad para controlar el mensaje inicial
-
-
-notificaciones: boolean = false;
-  mensaje: string = '';
-  notificacionVista: boolean = false; // Nueva variable para verificar si la notificación ha sido vista
+  notificaciones: boolean = false; // Estado de la notificación
+  mensaje: string = ''; // Mensaje de notificación
+  notificacionVista: boolean = false; // Verifica si la notificación ha sido vista
 
 constructor(private plantService: PlantService, private fb: FormBuilder, private authService:AuthService) { 
   // Inicializar el formulario de crear planta
@@ -72,31 +65,35 @@ constructor(private plantService: PlantService, private fb: FormBuilder, private
   });
 }
 
-  ngOnInit(): void {
-    this.fetchPlants();
+ngOnInit(): void {
+  // Carga la lista de plantas al inicializar el componente
+  this.fetchPlants();
 
-    const user = localStorage.getItem('user');
-    if (user) {
-      this.userData = JSON.parse(user);
-      //console.log('Datos del usuario en el dashboard:', this.userData);
-    }
+  // Verifica los datos de usuario almacenados
+  const user = localStorage.getItem('user');
+  if (user) {
+    this.userData = JSON.parse(user);
   }
+}
 
-  mostrarNotificacion() {
-    if (!this.notificacionVista) { // Solo muestra si no ha sido vista
-      this.notificaciones = true;
-      this.mensaje = '¡Gracias por probar la app!';
-    }else {
-      this.notificaciones = true
-    }
+// Muestra notificación si no ha sido vista previamente
+mostrarNotificacion() {
+  if (!this.notificacionVista) {
+    this.notificaciones = true;
+    this.mensaje = '¡Gracias por probar la app!';
+  } else {
+    this.notificaciones = true;
   }
+}
 
-  cerrarNotificacion() {
-    this.notificaciones = false;
-    this.notificacionVista = true; // Marca la notificación como vista
-    this.mensaje = 'No hay notificaciones.'; // Cambia el mensaje después de cerrarla
-  }
-   // Método para obtener y asignar datos de indicadores de un país específico
+// Cierra la notificación y marca como vista
+cerrarNotificacion() {
+  this.notificaciones = false;
+  this.notificacionVista = true;
+  this.mensaje = 'No hay notificaciones.'; 
+}
+
+  // Asigna los datos de indicadores de la planta seleccionada para mostrarlos en el componente
    showIndicators(plant: any) {
    // console.log('Plant data:', plant);
    // console.log('Indicators:', plant.indicators);
@@ -120,14 +117,12 @@ constructor(private plantService: PlantService, private fb: FormBuilder, private
     }
   }
   
-
-
-
+  // Muestra los detalles de la planta seleccionada en la interfaz
   showPlantDetails(plant: Plant) {
     this.selectedPlant = plant;
     console.log('Plant data:', this.selectedPlant);
   
-    // Hacer casting temporalmente para cada valor de `Object.entries()`
+       // Convierte los indicadores de la planta seleccionada en un array de objetos para mostrar en el template
     this.indicatorsDataCountry = Object.entries(this.selectedPlant.indicators).map(([key, value]) => {
       const indicatorValue = value as { unit1: number; unit2: number; unit3: number };
       return {
@@ -139,19 +134,19 @@ constructor(private plantService: PlantService, private fb: FormBuilder, private
     });
   }
   
-  
-
+  // Alterna la visibilidad del menú de acciones de una planta específica
   toggleActionMenu(plantId: number) {
     // Alterna el menú de acciones
     this.isActionMenuOpen = this.isActionMenuOpen === plantId ? null : plantId;
   }
 
+  // Obtiene la lista de plantas desde el servicio y maneja errores
   fetchPlants(): void {
     this.plantService.getAllPlants().subscribe({
       next: (data) => {
         this.plants = data;
         this.loading = false;
-        this.calculateTotals();
+        this.calculateTotals();// Actualiza los totales de la lista de plantas
       },
       error: (err) => {
         this.error = 'Error al cargar las plantas';
@@ -160,6 +155,7 @@ constructor(private plantService: PlantService, private fb: FormBuilder, private
     });
   }
 
+  // Calcula los totales de lecturas, alertas y sensores deshabilitados de las plantas
   calculateTotals(): void {
     this.totalReadings = this.plants.reduce((acc, plant) => acc + plant.readings, 0);
     this.totalMediumAlerts = this.plants.reduce((acc, plant) => acc + plant.mediumAlerts, 0);
@@ -167,15 +163,18 @@ constructor(private plantService: PlantService, private fb: FormBuilder, private
     this.totalDisabledSensors = this.plants.reduce((acc, plant) => acc + plant.disabledSensors, 0);
   }
 
+  // Muestra el formulario para agregar una nueva planta
   openForm(): void {
     this.showForm = true;
   }
 
+  // Cierra el formulario y lo reinicia
   closeForm(): void {
     this.showForm = false;
     this.plantForm.reset(); // Resetear el formulario
   }
 
+  // Crea una planta nueva a partir de los datos del formulario
   createPlant(): void {
     if (this.plantForm.valid) {
       this.plantService.createPlant(this.plantForm.value).subscribe({
@@ -193,7 +192,7 @@ constructor(private plantService: PlantService, private fb: FormBuilder, private
     }
   }
 
-  // Método para manejar el cambio de país
+  // Actualiza el código del país en el formulario cuando el usuario selecciona un país
   onCountryChange(event: any): void {
     const selectedCountry = this.countriesArray.find(country => country.name === event.target.value);
     if (selectedCountry) {
@@ -201,13 +200,12 @@ constructor(private plantService: PlantService, private fb: FormBuilder, private
     }
   }
 
-
-
+// Alterna la visibilidad del menú de opciones de una planta específica
   toggleMenu(plantId: number) {
     this.isMenuOpen = this.isMenuOpen === plantId ? null : plantId; // Alterna el menú
   }
 
-
+  // Elimina una planta tras confirmación del usuario
   deletePlant(plant: Plant) {
     // Mostrar un alert de confirmación
     const confirmDelete = confirm(`¿Estás seguro de que deseas eliminar la planta "${plant.name}"?`);
@@ -233,7 +231,7 @@ constructor(private plantService: PlantService, private fb: FormBuilder, private
     }
   }
 
-  
+    // Activa el formulario de edición para la planta seleccionada y precarga sus datos
   editPlant(plant: Plant) {
     this.toggleActionMenu(plant.id); // Cierra el menú de acciones al editar
     this.editingPlant = plant; // Asigna la planta seleccionada a `editingPlant`
@@ -253,12 +251,14 @@ constructor(private plantService: PlantService, private fb: FormBuilder, private
     this.showEditForm = true;
   }
 
+// Cierra y resetea el formulario de edición
 closeEditForm(): void {
   this.showEditForm = false;
   this.editingPlantForm.reset(); // Resetear el formulario
   this.editingPlant = null; // Reiniciar la planta en edición
 }
 
+// Guarda los cambios realizados en una planta
 savePlant(): void {
   if (this.editingPlantForm.valid && this.editingPlant) {
     // Combina los datos actuales de la planta con los valores editados del formulario, incluidos los deshabilitados
@@ -286,16 +286,19 @@ printPlantData(plant: Plant): void {
 }
 
 getIndicators() {
+  // Si no hay indicadores seleccionados, retorna un array vacío
   if (!this.selectedPlantIndicators) return [];
 
+  // Mapea cada clave del objeto de indicadores a un nuevo array de objetos formateados
   return Object.keys(this.selectedPlantIndicators).map(key => {
-      return {
-          title: key.charAt(0).toUpperCase() + key.slice(1), // Capitaliza el primer carácter del indicador
-          data: this.selectedPlantIndicators[key]
-      };
+    return {
+      title: key.charAt(0).toUpperCase() + key.slice(1), // Capitaliza el primer carácter del indicador
+      data: this.selectedPlantIndicators[key] // Obtiene el valor del indicador correspondiente
+    };
   });
 }
 
+// Datos de indicadores SVG asociados a claves específicas
 indicatorsDataJson = [
   { key: 'energia', title: 'Energía', svg: 'assets/svgs/energia.svg' },
   { key: 'monoxidoCarbono', title: 'Monóxido de Carbono', svg: 'assets/svgs/monoxido.svg' },
@@ -307,7 +310,7 @@ indicatorsDataJson = [
   { key: 'viento', title: 'Viento', svg: 'assets/svgs/viento.svg' },
 ];
 
-  countriesArray = [
+countriesArray = [
     { name: 'Afganistán', code: 'AF' },
     { name: 'Albania', code: 'AL' },
     { name: 'Alemania', code: 'DE' },
