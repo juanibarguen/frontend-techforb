@@ -12,6 +12,17 @@
     max-width: 400px;
     margin: auto;
   }
+
+  .register-container h2 {
+    padding: 20px 0 10px;
+    font-weight: 400;
+    font-size: 25px;
+  }
+
+  .existing-account {
+    font-size: 14px;
+    padding: 10px 0;
+  }
   
   input.ng-invalid.ng-touched {
     border-color: red;
@@ -74,7 +85,7 @@
   .goToLogin {
     font-weight: 600;
     cursor: pointer;
-    color: #111111;
+    color: #33a3aa;
   }
   
 
