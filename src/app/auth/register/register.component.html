@@ -47,9 +47,6 @@
     <button type="submit" [disabled]="registerForm.invalid">Registrarse</button>
   </form>
 
-  <div *ngIf="successMessage" class="success">{{ successMessage }}</div>
-  <div *ngIf="errorMessage && errorMessage !== 'Las contraseñas no coinciden'" class="error">{{ errorMessage }}</div>
-
   <div *ngIf="errorMessage" class="alert alert-danger">
     {{ errorMessage }}
   </div>
