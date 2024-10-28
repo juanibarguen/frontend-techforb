@@ -11,11 +11,10 @@ export class AuthService {
   private userSubject: BehaviorSubject<any>;
   public user: Observable<any>;
 
-  private userInfo = new BehaviorSubject<any>(null); // Estado del usuario
+  private userInfo = new BehaviorSubject<any>(null); 
 
 
   constructor(private http: HttpClient) {
-    // Inicializa el BehaviorSubject con los datos del usuario del localStorage (si existen)
     this.userSubject = new BehaviorSubject<any>(JSON.parse(localStorage.getItem('user')!));
     this.user = this.userSubject.asObservable();
   }
@@ -37,8 +36,8 @@ export class AuthService {
           username: data.username,
         };
         localStorage.setItem('user', JSON.stringify(userData));
-        this.userSubject.next(userData); // Actualiza el BehaviorSubject
-        return data; // O puedes retornar userData, según tu necesidad
+        this.userSubject.next(userData); 
+        return data
       })
     );
   }

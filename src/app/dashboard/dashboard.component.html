@@ -231,8 +231,8 @@
 
 
 <div *ngIf="showForm" class="form-container">
-    <div class="form-background"></div> <!-- Fondo borroso -->
-    <div class="form-content"> <!-- Contenido del formulario -->
+    <div class="form-background"></div> 
+    <div class="form-content">
       <h2 class="form-title" id="form-title">Crear Nueva Planta</h2>
       <form [formGroup]="plantForm" (ngSubmit)="createPlant()">
         <div class="form-group">
@@ -297,7 +297,7 @@
   <div *ngIf="showEditForm" class="edit-form">
     <h2>Editar Planta</h2>
     <form [formGroup]="editingPlantForm" (ngSubmit)="savePlant()">
-      <!-- Campos de solo lectura -->
+
       <div class="form-group">
         <label>Nombre de la Planta:</label>
         <input type="text" [value]="editingPlantForm.get('name')?.value" disabled />
@@ -307,7 +307,7 @@
         <input type="text" [value]="editingPlantForm.get('country')?.value" disabled />
       </div>
   
-      <!-- Campos editables -->
+      
       <div class="form-group">
         <label>Lecturas:</label>
         <input formControlName="readings" type="number">

@@ -10,6 +10,7 @@ body {
   background-color: #E8F0F3;
   height: 100%;
 }
+
 html {
   height: 100%;
 }
@@ -21,7 +22,7 @@ html {
 .notification{
   top: 85px;
   position: absolute;
-  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5); /* Sombra simple */
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5); 
 
   background: #fff;
   padding: 15px;

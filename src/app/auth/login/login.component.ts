@@ -48,7 +48,6 @@ export class LoginComponent {
         },
         error: (err) => {
           console.error('Error en el inicio de sesión', err);
-          // Utiliza el mensaje de error específico del backend
           this.errorMessage = err.error || 'Error en el inicio de sesión. Verifica tus credenciales.';
           this.successMessage = '';
         }
