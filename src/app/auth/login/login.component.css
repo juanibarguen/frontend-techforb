@@ -1,163 +1,188 @@
 
 .error-message {
-    color: red;
-    margin-bottom: 10px;
-  }
+  color: red;
+  margin-bottom: 10px;
+}
 
-  .labelResponsive {
-    display: none;
-  }
-  
-  .success-message {
-    color: green;
-    margin-bottom: 10px;
-  }
-  
-  .login-container {
-    max-width: 300px;
-    margin: auto;
-  }
-  
-  input.ng-invalid.ng-touched {
-    border-color: red;
-  }
-  
-  button {
-    width: 100%;
-    padding: 10px;
-    background-color: #33a3aa;
-    border-radius: 12px;
-    color: white;
-    border: none;
-    cursor: pointer;
-  }
-  
-  button:disabled {
-    background-color: #ccc;
-  }
-  
+.labelResponsive {
+  display: none;
+}
+
+.success-message {
+  color: green;
+  margin-bottom: 10px;
+}
+
+.reCAPTCHA {
+  font-size: 12px;
+  font-weight: 400;
+  color: #656565;
+  padding: 10px 0;
+}
+
+.content-cta > a {
+  font-size: 14px;
+  text-decoration: none;
+  color: #1e1e1e;
+}
+
+.reCAPTCHA span {
+  color: #33a3aa;
+}
+
+.no-account {
+  font-size: 14px;
+  color: #1e1e1e;
+}
+
+.no-account > a {
+color: #33a3aa;
+text-decoration: none;
+}
+
+.login-container {
+  max-width: 300px;
+  margin: auto;
+}
+
+input.ng-invalid.ng-touched {
+  border-color: red;
+}
+
+button {
+  width: 100%;
+  padding: 10px;
+  background-color: #33a3aa;
+  border-radius: 12px;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+button:disabled {
+  background-color: #ccc;
+}
 
 
 
-  
+
+
 
 
 .input-container {
-  position: relative;
-  display: inline-block;
-  width: 290px;
+position: relative;
+display: inline-block;
+width: 290px;
 }
 
 #label {
-  position: absolute;
-  top: -10px;
-  left: 10px;
-  background-color: white;
-  padding: 0 5px; 
-  font-size: 12px; 
-  color: gray;
+position: absolute;
+top: -10px;
+left: 10px;
+background-color: white;
+padding: 0 5px; 
+font-size: 12px; 
+color: gray;
 }
 
 input {
-  width: 100%;
-  border: 1px solid #ccc;
-  border-radius: 10px;
-  font-size: 16px;
-  padding: 10px 10px;
+width: 100%;
+border: 1px solid #ccc;
+border-radius: 10px;
+font-size: 16px;
+padding: 10px 10px;
 }
 
 
 
 
 form {
-  display: flex;
-  flex-direction: column;
-  row-gap: 1em;
+display: flex;
+flex-direction: column;
+row-gap: 1em;
 }
 
 
 .content-cta {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+display: flex;
+align-items: center;
+justify-content: space-between;
 }
 
-.content-cta > a {
-  font-size: 12px;
-}
+
 
 .content-cta > button {
-  width: 35%;
-  font-size: 13px;
+width: 35%;
+font-size: 13px;
 }
 
 .login-container-text h3{
-  padding-bottom: 25px;
+padding-bottom: 25px;
 }
 
 
-/* Ocultar el div por defecto */
+
 .login-responsive-img {
-  display: none; /* O puedes usar visibility: hidden; */
+display: none; 
 }
 
 @media screen and (max-width:655px) {
-  .login-container  h2 {
-    display: none;
-  }
+.login-container  h2 {
+  display: none;
+}
 
-  .login-container-text {
-    text-align: center;
-    margin: 0 0 110px 0;
-  }
+.login-container-text {
+  text-align: center;
+  margin: 0 0 110px 0;
+}
 
-  .login-container-text h3{
-    font-size: 30px;
-    font-weight: 500;
-    margin: 0;
-    padding-bottom: 0;
-  }
+.login-container-text h3{
+  font-size: 30px;
+  font-weight: 500;
+  margin: 0;
+  padding-bottom: 0;
+}
 
-  .content-cta a {
-    display: none;
-  }
+.content-cta a {
+  display: none;
+}
 
-  .login-container p {
-    display: none;
-  }
+.login-container p {
+  display: none;
+}
 
-  .login-container-form {
-    height: 35vh;
-  }
+.login-container-form {
+  height: 35vh;
+}
 
-  .login-responsive-img {
-    display: flex;
-    justify-content: center;
-  }
+.login-responsive-img {
+  display: flex;
+  justify-content: center;
+}
 
-  .content-cta > button {
-    width: 302px;
-    margin-top: 100px;
-    height: 50px;
-    font-size: 16px;
-    font-weight: 500;
-    position: absolute;
-    bottom: 50px;
-  }
+.content-cta > button {
+  width: 302px;
+  margin-top: 100px;
+  height: 50px;
+  font-size: 16px;
+  font-weight: 500;
+  position: absolute;
+  bottom: 50px;
+}
 
-  #label {
-    display: none;
-  }
+#label {
+  display: none;
+}
 
-  .labelResponsive {
-    display: block;
-    font-size: 12px; 
-  color: gray;
-  padding: 0 0 10px 5px;
-  }
+.labelResponsive {
+  display: block;
+  font-size: 12px; 
+color: gray;
+padding: 0 0 10px 5px;
+}
 
-  input {
-    padding: 10px 0px 10px 10px;
+input {
+  padding: 10px 0px 10px 10px;
 }
 
 
